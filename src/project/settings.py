@@ -24,13 +24,13 @@ import os
 from dotenv import load_dotenv
 # load envirment varaible from .env file
 load_dotenv()
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG')
 
 # Application definition
-ALLOWED_HOSTS = ['www.electronyem.pythonanywhere.com', 'electronyem.pythonanywhere.com']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.db.backends.mysql",
         "NAME": os.getenv('DB_NAME'),
         "USER": os.getenv('DB_USER'),
         "PASSWORD": os.getenv('DB_PASSWORD'),
