@@ -1,0 +1,23 @@
+<section>
+    <div class="w-layout-blockcontainer container bundle w-container">
+      <h1 class="head">حقائب الكترونية جاهزة</h1>
+      <div class="w-layout-grid grid">
+        {% for package in packages %}
+        <div id="w-node-b94aab6b-4dfe-b5b0-e05f-78f0ee90753a-2d074dfd" class="w-layout-blockcontainer card bundle w-container">
+          <img src="{{package.PkImg.url}}" alt="" class="product-img" />
+          <div class="w-layout-blockcontainer info-card-container w-container">
+            <h2 class="name-product">{{ package.PkName }}</h2>
+            <h3 class="des-product">{{package.PkDesc}}</h3>
+            
+            <form class="add-to-cart-form" method="post" data-item-id="{{ package.id }}" data-item="package">
+              {% csrf_token %}
+              <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
+              <button type="button" class="add-to-cart-button button w-button">اضف الى العربة</button>
+            </form>
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>

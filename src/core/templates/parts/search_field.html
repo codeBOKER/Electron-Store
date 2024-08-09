@@ -1,0 +1,48 @@
+<section class="section-2 search-page">
+    <div class="w-layout-blockcontainer container product search-page w-container">
+        <form class="search search-page w-form" id="search-form" method="post">
+            {% csrf_token %}
+            <input class="search-input search-page w-input" maxlength="256" name="query" placeholder="...بحث" type="search" id="query" required="" value="{% if query != " " %} {{query}} {% endif %}"/>
+            <input  type="submit" class="search-button search-page w-button" value="" />
+            <div class="seach-logo-hand search-page"></div>
+        </form>
+        <div class="w-layout-blockcontainer line-div-1 w-container">
+            <div class="cir search-page top-side"></div>
+            <div class="cir search-page left-side"></div>
+            <div class="cir search-page buttom-side"></div>
+            <div class="cir search-page middel-side"></div>
+            <div class="cir search-page button-left"></div>
+            <div class="cir search-page"></div>
+            <div class="cir search-page left"></div>
+            <div class="line-6 l-2 search-page"></div>
+            <div class="line-6 l-2 search-page left-top"></div>
+            <div class="line-6 l-2 search-page left"></div>
+            <div class="line-4 l-2 search-page"></div>
+        </div>
+        <div class="cir search-page top"></div>
+        <div class="cir search-page left top right-side"></div>
+        <div class="cir search-page left top"></div>
+        <div class="line-6 l-2 search-page top"></div>
+        <div class="line-6 l-2 search-page left-top top"></div>
+        <div class="line-6 l-2 search-page left top"></div>
+        <div class="line-4 l-2 search-page top"></div>
+    </div>
+</section>
+<script>
+    $(document).ready(function() {
+        $('#search-form').submit(function(event) {
+            event.preventDefault();
+            var query = $('#query').val();
+            $.ajax({
+                type: 'POST',
+                url: '/search/',
+                data: {'query': query},
+                success: function(data) {
+                    $('#search-results').html(data);
+                    // Update the URL in the browser's address bar to reflect the search query
+                    window.history.pushState({}, '', '/search/?query=' + query);
+                }
+            });
+        });
+    });
+</script>

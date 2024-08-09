@@ -1,0 +1,47 @@
+{% load static %}
+<section class="section">
+    <article class="w-layout-blockcontainer hero-container-right-side w-container">
+      <div class="cir c-2"></div>
+      <div class="line-2"></div>
+      <div class="line-1"></div>
+      <div class="line-3 l-1"></div>
+      <div class="line-3 l-2"></div>
+      <div class="line-3 l-3"></div>
+      <div class="line-3"></div>
+      <div class="line-4 l-1"></div>
+      <div class="line-4 l-2"></div>
+      <div class="line-4"></div>
+      <div class="line-7"></div>
+      <div class="line-6 l-1"></div>
+      <div class="line-6 l-2"></div>
+      <div class="line-6 l-3"></div>
+      <div class="line-6"></div>
+      <div class="cir c-1"></div>
+      <div class="cir c-3"></div>
+      <div class="cir c-4"></div>
+      <div class="cir c-5"></div>
+      <div class="cir c-6"></div>
+      <div class="cir"></div>
+      <div class="line-5"></div>
+      <div class="line-8"></div>
+    </article>
+    <div class="w-layout-blockcontainer hero-container-left-side w-container">
+      <div class="w-layout-grid logo-grid">
+        <img src="{% static 'images\logo.PNG' %}" loading="lazy" id="w-node-dc001790-62db-02b2-fb8b-f78bde932006-2d074dfd" alt="" class="logo-img" />
+        <div id="w-node-c9cffa56-1423-e8ee-fbf2-3c05208bd2c6-2d074dfd" class="w-layout-blockcontainer container-5 w-container">
+          <h4 class="electron-orange">الكترون</h4>
+          <h1 class="electron-black">Electron</h1>
+        </div>
+      </div>
+      <form action="/search/" class="search w-form" method="post">
+        {% csrf_token %}
+        <input class="search-input w-input" maxlength="256" name="query" placeholder="...بحث" type="search" id="query" required="" />
+        <button type="submit" class="search-button w-button" value=""> </button>
+        <div class="seach-logo-hand"></div>
+      </form>
+      <div class="txt-container">
+        <h3 class="identtity-txt-1">الشريك الموثوق</h3>
+        <h1 class="identity-txt-2">لجميع احتياجاتك الالكترونية</h1>
+      </div>
+    </div>
+  </section>

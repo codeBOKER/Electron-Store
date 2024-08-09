@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <title>{{title}}</title>
+    <script src="{% static 'js/base.js' %}"></script>
+{% endblock head %}
+{% block body %}
+    <body class="body">
+        {% include "parts/navbar.html" %}
+        <section class="section-2">
+            <img src="{{ img.url }}" loading="lazy" alt="{{ title }}" class="catg-img" />
+            <div class="w-layout-blockcontainer container product w-container">
+                <h1 class="catg-head">{{title}}</h1>
+            </div>
+        </section>
+        {% include "parts/products.html" %}
+
+        {% include "parts/categories.html" %}
+        
+        {% include "parts/footer.html" %}
+    </body>
+{% endblock body %}

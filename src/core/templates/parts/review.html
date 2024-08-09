@@ -1,0 +1,19 @@
+<section>
+    <div class="w-layout-blockcontainer container w-container">
+      <h1 class="head">ماذا يقول عنا عملائنا</h1>
+      <div class="w-layout-grid msg-grid">
+        {% for review in customer_reviews %}
+        <div id="w-node-acfc3c9c-3228-6c55-6773-6868c41da39c-2d074dfd" class="w-layout-blockcontainer customer-msg w-container">
+          <div class="w-layout-grid customer-grid">
+            <div id="w-node-_65be52f9-73fe-816a-fda6-6b5ff3bf2d6e-2d074dfd" class="w-layout-blockcontainer customer-info w-container">
+              <h2 class="customer-name">{{review.CrName}}<br /></h2>
+              <h3 class="customer-work">{{review.CrJob}}</h3>
+            </div>
+            <img src="{{review.CrImg.url}}" loading="lazy" width="50" id="w-node-c000f9a7-bc32-0db1-d4e7-6b036d89f423-2d074dfd" alt="{{review.CrName}}" class="customer-img" />
+          </div>
+          <p class="customer-pargraph">{{review.CrReview}}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</section>

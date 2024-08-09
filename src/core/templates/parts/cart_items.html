@@ -1,0 +1,143 @@
+
+<section class="cart-section">
+  <div class="w-layout-grid cart-grid">
+    <div id="w-node-_71a15300-0c0e-28be-1dd4-9edf40986d51-bfb5d3ec" class="w-layout-blockcontainer cart-total w-container">
+      <div class="cart-count-div">
+        <h1 class="cart-count-num" id="cart-item-count-cart"></h1>
+        <h1 class="cart-count-button">عدد المنتجات</h1>
+      </div>
+      <a class="whatsapp-button w-button" id="whatsapp-button">اكمال الطلب بالوتس اب</a>
+    </div>
+    <div id="w-node-_4db3111d-3bcc-ab0d-f259-2ae4d4cae1dd-bfb5d3ec" class="w-layout-grid items-grid">
+      {% for item in cart_items %}
+        <div id="" class="w-layout-grid cart-card-item" data-item-id="{{ item.id }}">
+          <div class="w-layout-grid cart-card-info">
+            <div id="w-node-_3896cde8-b7c9-6213-6613-037e5f5c557d-bfb5d3ec">
+              {% if item.CiProduct %}
+                <h1 id="w-node-_7deb7650-5826-5062-8ddd-34149e9d759a-bfb5d3ec" class="cart-card-name">{{ item.CiProduct }}</h1>
+                <h3 class="cart-card-categ">{{ item.CiProduct.ProCatg }}</h3>
+              {% else %}
+                <h1 id="w-node-_7deb7650-5826-5062-8ddd-34149e9d759a-bfb5d3ec" class="cart-card-name">{{ item.CiPackage }}</h1>
+              {% endif %}
+            </div>
+            {% if item.CiProduct %}
+              <p class="cart-card-desc">{{ item.CiProduct.ProDesc }}</p>
+            {% else %}
+              <p class="cart-card-desc">{{ item.CiPackage.PkDesc }}</p>
+            {% endif %}
+            <div id="w-node-_53d72301-f3b5-227e-4299-67768a17dc63-bfb5d3ec" class="w-layout-grid cart-card-quatity">
+              <button class="remove-button w-button" data-item-id="{{ item.id }}" id="w-node-_3d409f6c-c21b-078a-e671-014da7a355eb-bfb5d3ec">حذف</button>
+
+              <div id="w-node-bb9b2c6b-22a2-1bd6-be42-473926a58400-bfb5d3ec" class="form-block w-form">
+                <input class="text-field w-input" type="number" id="quantity-{{ item.id }}" value="{{ item.CiQuantity }}" min="1" />
+                <label for="quantity-{{ item.id }}" class="field-label">: الكمية</label>
+              </div>
+            </div>
+          </div>
+          {% if item.CiProduct %}
+            <img src="{{ item.CiProduct.ProImg.url }}" id="w-node-_7d5825b0-9810-7c67-08de-7942644dc058-bfb5d3ec" alt="{{ item.CiProduct.ProName }}" class="cart-card-img" />
+          {% else %}
+            <img src="{{ item.CiPackage.PkImg.url }}" id="w-node-_7d5825b0-9810-7c67-08de-7942644dc058-bfb5d3ec" alt="{{ item.CiPackage.PkName }}" class="cart-card-img" />
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<script>
+    <!--count elements-->
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/get-cart-item-count/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('cart-item-count').textContent = data.cartItemCount;
+            document.getElementById('cart-item-count-cart').textContent = data.cartItemCount;
+        })
+        .catch(error => {
+            console.error('Error fetching cart item count:', error);
+        });
+        
+    document.querySelectorAll('.cart-card-item input[type="number"]').forEach(input => {
+        input.addEventListener('change', function() {
+            const itemId = this.closest('.cart-card-item').getAttribute('data-item-id');
+            const quantity = this.value;
+
+            fetch(`/update-cart/${itemId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({ quantity: quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data
+                console.log(data);
+            });
+        });
+    });
+    
+    document.querySelectorAll('.remove-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = this.getAttribute('data-item-id');
+
+            fetch(`/remove-from-cart/${itemId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data
+                console.log(data);
+                document.querySelector(`.cart-card-item[data-item-id="${itemId}"]`).remove();
+            })
+            .then(response => {
+                
+                fetch('/get-cart-item-count/')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('cart-item-count').textContent = data.cartItemCount;
+                    document.getElementById('cart-item-count-cart').textContent = data.cartItemCount;
+                })
+                .catch(error => {
+                    console.error('Error fetching cart item count:', error);
+                });
+                
+            });
+        });
+    });
+    
+        document.getElementById('whatsapp-button').addEventListener('click', function() {
+            let cartDetails = 'Your Cart:\n\n';
+            document.querySelectorAll('.cart-card-item').forEach(item => {
+                const itemName = item.querySelector('.cart-card-name').textContent;
+                const itemQuantity = item.querySelector('input[type="number"]').value;
+                cartDetails += `${itemName} - Quantity: ${itemQuantity}\n`;
+            });
+    
+            const whatsappUrl = `https://wa.me/00967782216901/?text=${encodeURIComponent(cartDetails)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    });
+    
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+

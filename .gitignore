@@ -1,0 +1,26 @@
+# Ignore compiled Python files
+*.py[cod]
+
+# Ignore Django's generated files
+__pycache__/
+*.pyc
+
+# Ignore static and media files
+staticfiles/
+media/
+
+# Ignore database files
+db.sqlite3
+
+# Ignore any local or private settings files
+local_settings.py
+
+# Ignore any virtual environment files
+venv/
+
+# ignore importent variables
+.env
+
+# my personal files
+front_end/
+auto_run

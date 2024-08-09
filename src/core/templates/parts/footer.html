@@ -1,0 +1,42 @@
+{% load static %}
+<section class="footer">
+    <main class="w-layout-blockcontainer container f w-container">
+      <div class="w-layout-grid footer-grid">
+        <div id="w-node-_1a74c354-d8a5-632d-5f49-95439ecdddc5-2d074dfd" class="w-layout-blockcontainer footer-container w-container">
+          <h1 class="footer-head">اتصل بنا</h1>
+          <a href="#" class="txt-link gmail">+967782216901</a>
+          <a href="#" class="txt-link gmail">electronyem@gmail.com</a>
+        </div>
+        <div id="w-node-_17f2d66d-355a-57b4-2a57-ca9b9072a41e-2d074dfd" class="w-layout-blockcontainer footer-container w-container">
+          <h1 class="footer-head">المنتجات</h1>
+          <a href="{% url "populer_items" %}" class="txt-link">الشائعة</a>
+          <a href="{% url "new_items" %}" class="txt-link">الجديدة</a>
+          <a href="{% url "packages" %}" class="txt-link">حقائب الكترونية</a>
+        </div>
+        <div id="w-node-_5b0db25c-2087-368f-2617-3729a2192829-2d074dfd" class="w-layout-blockcontainer footer-container w-container">
+          <h1 class="footer-head">الاقسام</h1>
+          {% for category in footer_categories %}
+              <a href="{% url "category_detail" category.id %}" class="txt-link">{{category.CatName}}</a>    
+          {% endfor %}
+          
+        </div>
+        <div id="w-node-b07541c9-4edf-157a-c60b-70916a364d78-2d074dfd" class="w-layout-blockcontainer logo-container w-container">
+          <img src="{% static 'images/logo.PNG' %}" loading="lazy" alt="" class="logo-img" />
+          <div class="w-layout-grid socia-grid">
+            <a id="w-node-_5deecc84-3db0-fb4c-62ef-7919a38e7507-2d074dfd" href="#" class="w-inline-block">
+              <img src="{% static 'images/instgram.svg' %}" loading="lazy" id="w-node-_46145b49-f24e-0947-8aa3-048f26a83a57-2d074dfd" alt="instgram" class="instgram" />
+            </a>
+              <a id="w-node-f9a55386-ddec-3a62-f136-b6b94434bfa4-2d074dfd" href="#" class="w-inline-block">
+                <img src="{% static 'images/whatsapp.svg' %}" loading="lazy" id="w-node-f9a55386-ddec-3a62-f136-b6b94434bfa5-2d074dfd" alt="whatsapp" class="whatsapp" />
+              </a>
+              <a id="w-node-_0846ebba-8c42-a05d-1ca7-63989e44d321-2d074dfd" href="#" class="w-inline-block">
+                <img src="{% static 'images/x.svg' %}" loading="lazy" id="w-node-_0846ebba-8c42-a05d-1ca7-63989e44d322-2d074dfd" alt="x" class="image-7" />
+              </a>
+              <a id="w-node-aa978d8d-efc9-bc26-952d-383018082722-2d074dfd" href="#" class="w-inline-block">
+                <img src="{% static 'images/facebook.svg' %}" loading="lazy" id="w-node-aa978d8d-efc9-bc26-952d-383018082723-2d074dfd" alt="facebook" class="image-7" />
+              </a>
+          </div>
+        </div>
+      </div><a href="#" class="txt-link copyright">Copyright ©2024 | All Rights Reserved</a>
+    </main>
+</section>

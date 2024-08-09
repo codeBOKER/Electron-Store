@@ -1,0 +1,33 @@
+{% load static %}
+<div class="navbar-logo-left">
+    <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-logo-left-container shadow-three w-nav">
+      <div class="container-4">
+        <div class="navbar-wrapper">
+          <a href="{% url "cart" %}" class="cart w-inline-block">
+            <img src="{% static 'images\cart.png' %}" loading="lazy" width="Auto" alt="" class="cart-img" />
+            <h5 class="cart-num" id="cart-item-count" ></h5> <!--items number in the cart-->
+          </a>
+          <div class="menu-button w-nav-button">
+            <div class="w-icon-nav-menu"></div>
+          </div>
+          <nav role="navigation" class="nav-menu-wrapper w-nav-menu">
+            <ul role="list" class="nav-menu-two w-list-unstyled">
+              <li class="list-item">
+                
+                <a href="{% if cart %}{% url "home" %}{% endif %}#categories-section" class="nav-link-3">الاقسام</a>
+              </li>
+              <li>
+                <a href="{% if not page %}{% url "home" %}{% endif %}#about-us-section" class="nav-link-3">من نحن</a>
+              </li>
+              <li>
+                <a href="{% url "home" %}" class="nav-link-3">الرئيسية</a>
+              </li>
+            </ul>
+          </nav>
+          <a href="{% url "home" %}" class="navbar-brand w-nav-brand">
+            <img src="{% static 'images\logo.PNG' %}" loading="lazy" width="50" alt="" class="nav-logo" />
+          </a>
+        </div>
+      </div>
+    </div>
+</div>

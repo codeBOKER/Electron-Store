@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block head %} 
+    <title>cart</title>
+{% endblock head %}
+
+
+{% block body %}
+    <body class="body body-cart" cart="true">
+        {% include "parts/navbar.html" %}
+        {% include "parts/cart_items.html" %}    
+    </body>
+{% endblock body %}

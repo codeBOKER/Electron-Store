@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <title>search page</title>
+    <script src="{% static 'js/base.js' %}"></script>
+{% endblock head %}
+
+{% block body %}
+<body class="body" >
+    {% include "parts/navbar.html" %}
+
+    {% include "parts/search_field.html" %}
+    {% include "parts/products.html" %}
+    {% include "parts/packages.html" %}
+    {% include "parts/categories.html" %}
+
+    {% include "parts/footer.html" %}
+</body>
+{% endblock body %}
