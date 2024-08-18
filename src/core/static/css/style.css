@@ -2666,7 +2666,7 @@ h5 {
   width: 5px;
   height: 9px;
   position: relative;
-  top: -60px;
+  top: -51px;
   right: -33px;
   transform: rotate(-45deg);
 }
@@ -3997,7 +3997,7 @@ h5 {
   .seach-logo-hand {
     width: 4px;
     height: 7px;
-    top: -50px;
+    top: -42px;
     right: -27px;
   }
 
@@ -4472,7 +4472,7 @@ h5 {
   .seach-logo-hand {
     width: 4px;
     height: 6px;
-    top: -49px;
+    top: -42px;
     right: -26px;
   }
 
@@ -5375,7 +5375,7 @@ h5 {
     grid-template-columns: 33% 34% 33%;
     grid-auto-columns: auto;
     place-items: start center;
-    width: 360px;
+    width: 100%;
     display: grid;
   }
 

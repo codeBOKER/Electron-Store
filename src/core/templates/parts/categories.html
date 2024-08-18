@@ -4,7 +4,7 @@
     <div class="horizontal-grid snaps-inline">
       {% for category in categories %}
         <a id="" href="{% url "category_detail" category.id %}" class="card-cat w-inline-block">
-          <img src="{{category.CatImg.url}}" loading="lazy" alt="" class="img-cat" />
+          <img src="{{category.Catimg_url}}" loading="lazy" alt="" class="img-cat" />
           <h1 class="head-cat">{{category.CatName}}</h1>
         </a>
       {% endfor %}

@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG')
 
 # Application definition
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS =os.getenv('ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -88,6 +89,9 @@ DATABASES = {
         "PASSWORD": os.getenv('DB_PASSWORD'),
         "HOST": os.getenv('DB_HOST'),
         "PORT": os.getenv('DB_PORT'),
+		'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        },
     }
 }
 
@@ -114,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ar'
 
 TIME_ZONE = 'UTC'
 
@@ -122,6 +126,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('ar', 'Arabic'),
+    # Add other languages as needed
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -133,6 +142,8 @@ STATIC_URL = 'static/'
 MEDIA_URL='media/'
 MEDIA_ROOT=BASE_DIR / 'media'
 
+
+API_KEY = os.getenv('IMAGE_API_KEY') 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

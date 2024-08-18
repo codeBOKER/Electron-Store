@@ -35,9 +35,9 @@
             </div>
           </div>
           {% if item.CiProduct %}
-            <img src="{{ item.CiProduct.ProImg.url }}" id="w-node-_7d5825b0-9810-7c67-08de-7942644dc058-bfb5d3ec" alt="{{ item.CiProduct.ProName }}" class="cart-card-img" />
+            <img src="{{ item.CiProduct.Proimg_url }}" id="w-node-_7d5825b0-9810-7c67-08de-7942644dc058-bfb5d3ec" alt="{{ item.CiProduct.ProName }}" class="cart-card-img" />
           {% else %}
-            <img src="{{ item.CiPackage.PkImg.url }}" id="w-node-_7d5825b0-9810-7c67-08de-7942644dc058-bfb5d3ec" alt="{{ item.CiPackage.PkName }}" class="cart-card-img" />
+            <img src="{{ item.CiPackage.Pkimg_url }}" id="w-node-_7d5825b0-9810-7c67-08de-7942644dc058-bfb5d3ec" alt="{{ item.CiPackage.PkName }}" class="cart-card-img" />
           {% endif %}
         </div>
       {% endfor %}
@@ -111,15 +111,16 @@
             });
         });
     });
-    
+        const headMessage = `{{ message.head_message|escapejs }}`;
+        const footerMessage = `{{ message.footer_message|escapejs }}`;
         document.getElementById('whatsapp-button').addEventListener('click', function() {
-            let cartDetails = 'Your Cart:\n\n';
+            let cartDetails = headMessage;
             document.querySelectorAll('.cart-card-item').forEach(item => {
                 const itemName = item.querySelector('.cart-card-name').textContent;
                 const itemQuantity = item.querySelector('input[type="number"]').value;
-                cartDetails += `${itemName} - Quantity: ${itemQuantity}\n`;
+                cartDetails += `${itemName}\nالكمية: ${itemQuantity}\n\n`;
             });
-    
+            cartDetails+= footerMessage;
             const whatsappUrl = `https://wa.me/+967782216901/?text=${encodeURIComponent(cartDetails)}`;
             window.open(whatsappUrl, '_blank');
         });

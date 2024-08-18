@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, Package, Cart, Category, CartItem, Additional, Customer_review
+from .models import Product, Package, Cart, Category, CartItem, Additional, Customer_review, Message
 from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -84,6 +84,7 @@ def cart(request):
     """
     cart_id = request.session.get('cart_id') # get user cart
     footer_categories= Category.objects.all()[:3]
+    message = Message.objects.first()
     # present list of items if he has
     if cart_id:
         cart = Cart.objects.get(id=cart_id)
@@ -96,6 +97,7 @@ def cart(request):
         'cart': cart,
         'cart_items': cart_items,
         'footer_categories': footer_categories,
+        'message': message,
     })
 
 # new items page
@@ -116,14 +118,13 @@ def new_items(request):
 
     new_products = Product.objects.order_by('-ProCreated_at')[:90]
     new_packages = Package.objects.order_by('-PkCreated_at')[:90]
-    title= "منتجات جديدة"
-    img= Additional.objects.get(AdName= title).AdImg
-    return render(request, 'new.html', {
+    infos= Additional.objects.get(id= 1)
+    return render(request, 'addtional_pages_template.html', {
         'categories':categories,
         'footer_categories':footer_categories,
         'products': new_products,
         'packages':new_packages,
-        'img':img,
+        'infos':infos,
     })
 
 # populer items page
@@ -144,14 +145,13 @@ def populer_items(request):
 
     populer_products = Product.objects.order_by('-ProClicks')[:90]
     populer_packages = Package.objects.order_by('-PkClicks')[:90]
-    title= "منتجات شائعة"
-    img= img= Additional.objects.get(AdName= title).AdImg
-    return render(request, 'populer.html', {
+    infos= Additional.objects.get(id= 2)
+    return render(request, 'addtional_pages_template.html', {
         'categories':categories,
         'footer_categories':footer_categories,
         'products': populer_products,
         'packages':populer_packages,
-        'img':img,
+        'infos': infos,
     })
 
 # our package page 
@@ -169,13 +169,13 @@ def packages_veiw(request):
     categories = Category.objects.all()
     footer_categories = Category.objects.all()[:3]
     packages = Package.objects.all()
-    title = "حقائب الكترونية"
-    img = Additional.objects.get(AdName=title).AdImg
+    
+    infos = Additional.objects.get(id= 4)
 
-    return render(request, 'package.html', {
+    return render(request, 'addtional_pages_template.html', {
         'packages': packages,
         'footer_categories': footer_categories,
-        'img': img,
+        'infos': infos,
         'categories': categories,
     })
 
@@ -210,8 +210,8 @@ class CategoryDetailView(DetailView):
         context['products'] = Product.objects.filter(ProCatg=category)
         context['footer_categories'] = Category.objects.all()[:3]
         context['categories'] = Category.objects.all()
-        context['title'] = category.CatName
-        context['img'] = category.CatImg
+        context['infos'] = category
+        
         return context
 # ----------------------------our founctions in pages---------------------------
 # 1- add the product to the card

@@ -2,16 +2,16 @@
 {% load static %}
 
 {% block head %}
-    <title>{{title}}</title>
+    <title>{{infos.CatName}}</title>
     <script src="{% static 'js/base.js' %}"></script>
 {% endblock head %}
 {% block body %}
     <body class="body">
         {% include "parts/navbar.html" %}
         <section class="section-2">
-            <img src="{{ img.url }}" loading="lazy" alt="{{ title }}" class="catg-img" />
+            <img src="{{ infos.Catimg_url }}" loading="lazy" alt="{{ infos.CatName }}" class="catg-img" />
             <div class="w-layout-blockcontainer container product w-container">
-                <h1 class="catg-head">{{title}}</h1>
+                <h1 class="catg-head">{{infos.CatName }}</h1>
             </div>
         </section>
         {% include "parts/products.html" %}

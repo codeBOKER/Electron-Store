@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block head %} 
-    <title>منتجات جديدة</title>
+    <title>{{infos.AdName}}</title>
     <script src="{% static 'js/base.js' %}"></script>
 {% endblock head %}
 
@@ -10,9 +10,9 @@
     <body class="body">
         {% include "parts/navbar.html" %}
         <section class="section-2">
-            <img src="{{ img.url }}" loading="lazy" alt="منتجات جديدة" class="catg-img" />
+            <img src="{{ infos.Adimg_url }}" loading="lazy" alt="{{infos.AdName}}" class="catg-img" />
             <div class="w-layout-blockcontainer container product w-container">
-              <h1 class="catg-head">منتجات جديدة</h1>
+              <h1 class="catg-head">{{infos.AdName}}</h1>
             </div>
         </section>
         {% include "parts/products.html" %}
