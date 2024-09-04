@@ -3048,10 +3048,13 @@ h5 {
   font-size: 20px;
 }
 
-.txt-link.copyright {
+.txt-creator {
+  color: #ffffffa8;
   text-align: left;
   margin-top: 69px;
-  font-size: 12px;
+  font-size: 15px;
+  text-decoration: none;
+  display: block;
 }
 
 .socia-grid {
@@ -4624,7 +4627,7 @@ h5 {
     font-size: 15px;
   }
 
-  .txt-link.copyright {
+  .txt-creator {
     font-size: 10px;
   }
 
@@ -5396,14 +5399,22 @@ h5 {
     line-height: 11px;
   }
 
-  .txt-link.copyright {
+  .txt-creator {
     align-items: center;
     margin-top: 20px;
   }
 
+  .creator-img {
+    width: 18px;
+  }
+  .creator-img.whats{
+    width: 16px;
+  }
+
   .txt-link.gmail {
     margin-top: 8px;
-    font-size: 8px;
+    font-size: 10px;
+    
   }
 
   .socia-grid {
