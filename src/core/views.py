@@ -3,35 +3,25 @@ from .models import Product, Package, Cart, Category, CartItem, Additional, Cust
 from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
 
 
 #------------------------------our pages-------------------------------
 # our index page:    
 from django.db.models import Q
-def index(request):
-    """
-    This function handles the rendering of the index page. It retrieves and prepares data for the index page template.
 
-    Parameters:
-    request (HttpRequest): The request object containing information about the client's request.
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
-    Returns:
-    HttpResponse: The rendered index page with the necessary data.
-    """
-    categories = Category.objects.all()
-    footer_categories = Category.objects.all()[:3]
-    customer_reviews = Customer_review.objects.filter(CrShow=True)[:3]
-
-    products = Product.objects.order_by('-ProClicks')[:20]
-    packages = Package.objects.all()[:20]
-
-    return render(request, 'index.html', {
-        'categories': categories,
-        'products': products,
-        'packages': packages,
-        'footer_categories': footer_categories,
-        'customer_reviews': customer_reviews,
-    })
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['footer_categories'] = Category.objects.all()[:3]
+        context['customer_reviews'] = Customer_review.objects.filter(CrShow=True)[:3]
+        context['products'] = Product.objects.order_by('-ProClicks')[:20]
+        context['packages'] = Package.objects.all()[:20]
+        return context
+    
 def search_view(request):
     """
     This function handles the rendering of the search results page. It retrieves and prepares data for the search results page template.

@@ -3,8 +3,8 @@ from . import views
 
 urlpatterns = [
     # home page
-    path('', views.index),
-    path('home/', views.index, name='home'),
+    path('', views.IndexView.as_view()),
+    path('home/', views.IndexView.as_view(), name='home'),
     
     # search page
     path('search/', views.search_view, name='search_view'),
